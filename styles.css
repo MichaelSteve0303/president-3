@@ -1,0 +1,80 @@
+/* Estilo general para centrar el contenido en la pantalla */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Alinear el contenido en columna */
+    height: 100vh;
+    background-color: #000; /* Fondo negro para toda la página */
+}
+
+/* Contenedor del letrero */
+.contenedor {
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    overflow: hidden; /* Esconde el letrero cuando sale del contenedor */
+    white-space: nowrap; /* Impide que el letrero se divida en líneas */
+}
+
+/* Estilo del letrero que se moverá */
+.letrero {
+    display: inline-block;
+    font-size: 10vw; /* Aumenté el tamaño del texto a 10vw para hacerlo mucho más grande */
+    padding: 10px;
+    background-color: #333; /* Fondo gris oscuro del letrero */
+    color: white; /* Color del texto */
+    border-radius: 5px;
+    animation: movimiento 21s linear infinite; /* Animación más rápida: 7 segundos */
+    transform: scaleX(-1); /* Invertir horizontalmente para que se vea bien en la cámara frontal */
+}
+
+/* Animación que mueve el letrero de derecha a izquierda y lo hace regresar */
+@keyframes movimiento {
+    0% {
+        transform: translateX(-100%) scaleX(-1); /* Comienza fuera de la pantalla a la izquierda */
+    }
+    25% {
+        transform: translateX(100%) scaleX(-1); /* Se mueve hacia la derecha y sale de la pantalla */
+    }
+    50% {
+        transform: translateX(100%) scaleX(-1); /* Permanece un momento fuera de la pantalla */
+    }
+    75% {
+        transform: translateX(-100%) scaleX(-1); /* Vuelve a entrar por la derecha hacia la izquierda */
+    }
+    100% {
+        transform: translateX(-100%) scaleX(-1); /* Sale nuevamente por la izquierda */
+    }
+}
+
+/* Ajustes de estilo para pantallas pequeñas (tabletas y teléfonos) */
+@media (max-width: 768px) {
+    .letrero {
+        font-size: 12vw; /* Ajuste de tamaño del texto para pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .letrero {
+        font-size: 14vw; /* Ajuste de tamaño del texto para teléfonos más pequeños */
+    }
+}
+
+/* Mensaje que aparece cuando el teléfono está en vertical */
+.mensaje-vertical {
+    display: none; /* Ocultar por defecto */
+    color: white; /* Color del texto */
+    font-size: 2rem; /* Tamaño del texto del mensaje */
+    text-align: center; /* Centrar texto */
+    margin-top: 20px; /* Margen superior */
+}
+
+/* Mostrar el mensaje si el dispositivo está en vertical */
+@media (orientation: portrait) {
+    .contenedor, .letrero {
+        display: none; /* Oculta el letrero en orientación vertical */
+    }
+    .mensaje-vertical {
+        display: block; /* Muestra el mensaje de giro */
+    }
+}
